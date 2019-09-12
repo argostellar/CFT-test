@@ -21,21 +21,17 @@
 		console.log('CURRENT REGEXP: ');
 		console.log(regExp);
 		let isReal = regExp.test(cssString);
-		
+		console.log('STATE: ' + isReal);
 		if (isReal) {
-			console.log('DATA: ')
-			console.log(regExp.exec(cssString));
-			let search = cssString.search(regExp);
-			let matchedValues = cssString.match(regExp);
 			let split = cssString.split(regExp);
-			console.log('MATCHED VALUES: ');
-			console.log(matchedValues);
-			console.log('SEARCH RESULTS: ');
-			console.log(search);
-			console.log('STATE: ' + isReal);
 			console.log('SPLIT: ')
 			console.log(split);
-		}
+			console.log(split[1]);
+			let colorValues = split.slice().filter(item => regExp.test(item));
+			console.log(colorValues);
+			return colorValues;
+		} 
+		return;
 	};
 
 	let colors = document.styleSheets[0].cssRules[0];
@@ -48,7 +44,7 @@
 		console.log(selectorTextValue);
 		console.log('CSS TEXT: ');
 		console.log(cssTextValue);
-		let YES = cssTextValue.toString();
+		let YES = cssTextValue;
 		getColorValue(YES, testRegExp);
 	};
 
