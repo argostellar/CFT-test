@@ -9045,7 +9045,8 @@ a.text-dark:hover, a.text-dark:focus {
   flex-wrap: wrap;
   justify-content: flex-start;
 
-  margin: 10px auto;
+  margin: 10px 20px;
+  margin-right: auto;
 }
 
 .tiles-count {
