@@ -1,22 +1,28 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Color scheme viewer</title>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    
 </head>
+
 <body>
-	<button class="red-test" id="red">RED</button>
-	<template id="color-plate">
-	    <section class="color-plate">
-	      <div class="color-plate__inner">
-	        <h2 class="color-plate__title">Цвет плитки</h2>
-	      </div>
-	    </section>
-	 </template>
-	<script src="main.js" charset="utf-8"></script>
+    <main class="main">
+        <h2 class="tiles-count">Количество плиток: <span class="tiles-count__counter">0</span></h2>
+        <section class="tile-list"></section>
+    </main>
+    <template id="color-tile">
+        <section class="color-tile">
+            <div class="color-tile__inner">
+                <h3 class="color-tile__title">Цвет плитки:</h2>
+                    <p class="color-tile__name">Цвет</p>
+            </div>
+        </section>
+    </template>
+    <script src="main.js" charset="utf-8"></script>
 </body>
+
 </html>

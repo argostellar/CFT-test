@@ -9028,3 +9028,65 @@ a.text-dark:hover, a.text-dark:focus {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+
+/* Мои собственные стили для тегов, цвета не задаются */
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding: 0 10px;
+}
+
+.tile-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  margin: 10px auto;
+}
+
+.tiles-count {
+  margin: 0;
+  padding: 0;
+
+  margin: 10px auto;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.tiles-count__counter {
+  display: inline-block;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.color-tile {
+  width: 15%;
+  height: 80px;
+  margin-bottom: 5px;
+  margin-left: 10px;
+}
+
+.color-tile__inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.color-tile__title {
+  margin: 0;
+  padding: 0;
+
+  margin: 5px auto;
+  font-size: 18px;
+}
+
+.color-tile__name {
+  margin: 0;
+  padding: 0;
+
+  margin: 10px auto;
+}
