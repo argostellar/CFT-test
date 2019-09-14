@@ -10,18 +10,18 @@
 
     let styleSheets = document.styleSheets;
     let cssRules = Array.from(styleSheets[0].cssRules);
-    let colors = cssRules[0];
-    let colors2 = cssRules[1];
 
-    let cssRulesColors = []; // глобальный массив цветов
+    let cssRulesColors = []; // глобальный массив цветов, куда будут записаны все цвета из CSS
 
-    let testRegExp = /(#\w{3,6})/gm;
+    // регулярные выражения, используемые для поиска цветов
     let hexRegExp = /(#\w{3,6})/gm;
-    let rgbRegExp = /(rgb(?:\s|\b)\(\d{1,3},\s\d{1,3},\s\d{1,3}\))/gm;
-    let rgbaRegExp = /(rgba(?:\s|\b)\(\d{1,3},\s\d{1,3},\s\d{1,3},\s(?:(?:\d{0,1}\.\d+)|(?:[1|0]))\))/gm;
+    let rgbRegExp = /(rgb\b\(\d{1,3},\s\d{1,3},\s\d{1,3}\))/gm;
+    let rgbaRegExp = /(rgba\b\(\d{1,3},\s\d{1,3},\s\d{1,3},\s(?:(?:\d{0,1}\.\d+)|(?:[1|0]))\))/gm;
 
+    // массив регулярных выражений
     let regExps = [hexRegExp, rgbRegExp, rgbaRegExp];
 
+    // функция конвертации HEX цветов в RGBA цвета
     let convertHexToRgba = function (hex) {
         let r, g, b = '';
         let a = 1;
@@ -37,18 +37,20 @@
                 g = parseInt(hex.substring(1, 2), 16);
                 b = parseInt(hex.substring(2, 3), 16);
             }
-            let convertedValue = 'rgba (' + r + ', ' + g + ', ' + b + ', ' + a + ')';
+            let convertedValue = 'rgba(' + r + ', ' + g + ', ' + b + ', ' + a + ')';
             return convertedValue;
         }
         return hex;
     };
 
+    // функция конвертации RGB цветов в RGBA цвета
     let convertRgbToRgba = function (rgb) {
         rgb = rgb.replace(')', ', ');
         rgb = rgb.replace('(', 'a(');
         return rgb + '1)';
     };
 
+    // функция удаления одинаковых элементов внутри одного массива
     let removeEqualWithin = function (array) {
         let finalValues = [];
         let estimatedValues = array.slice();
@@ -60,6 +62,7 @@
         return finalValues;
     };
 
+    // функция, удаляющая значения из текущего массива, при обнаружении одинаковых в глобальном
     let removeEqual = function (globalValues, currentValues) {
         if (globalValues.length === 0) {
             return currentValues;
@@ -76,6 +79,7 @@
         };
     };
 
+    // функция извлечения цветов из текста CSS правила
     let getColorValue = function (cssString) {
         let colorValues = [];
         for (let i = 0; i < regExps.length; i++) {
@@ -99,6 +103,7 @@
         return colorValues;
     };
 
+    // функция извлечения цветов из CSS правила
     let getRuleColors = function (cssRule) {
         let cssTextValue = cssRule.cssText;
         let selectorTextValue = cssRule.selectorText;
@@ -106,6 +111,7 @@
         return ruleColors;
     };
 
+    // функция собирающая цвета из CSS в глобальный массив
     let collectStyleSheetsColors = function (cssRules) {
         cssRules.forEach(rule => {
             let uncheckedColors = getRuleColors(rule);
@@ -115,12 +121,12 @@
         });
     };
 
+    // функция создания цветовой плитки (используя шаблон)
     let createColorTile = function (color) {
         let colorTile = template.cloneNode(true);
         let colorName = colorTile.querySelector('.color-tile__name');
 
         colorTile.style.backgroundColor = color;
-        colorTile.style.boxSizing = 'border-box';
         colorTile.style.border = '1px solid black';
 
         colorName.textContent = color;
@@ -128,6 +134,7 @@
         return colorTile;
     };
 
+    // функция рендера плиток (используя глобальный массив цветов)
     let renderTiles = function (colors) {
         colors.forEach(color => {
             let currentTile = createColorTile(color);
@@ -136,12 +143,14 @@
         tileList.appendChild(fragment);
     };
 
+    // функция исполнения программы
     let executeTask = function () {
     	collectStyleSheetsColors(cssRules);
     	tilesCounter.textContent = cssRulesColors.length;
     	renderTiles(cssRulesColors);
     };
 
+    // исполнение программы (вызов функции)
     executeTask();
 
 })();
